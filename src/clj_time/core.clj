@@ -67,14 +67,15 @@
    you need to print or parse date-times, see clj-time.format. If you need to
    ceorce date-times to or from other types, see clj-time.coerce."
   (:refer-clojure :exclude [extend])
-  (:use [clojure.contrib.def :only (defvar)])
   (:import (org.joda.time DateTime DateTimeZone Period Interval)))
 
-(defvar utc
-  (DateTimeZone/UTC)
-  "DateTimeZone for UTC.")
+(def ^{:doc "DateTimeZone for UTC."}
+  utc
+  (DateTimeZone/UTC))
 
-(defn now []
+(defn now
+  {:dynamic true}
+  []
   "Returns a DateTime for the current instant in the UTC time zone."
   (DateTime. #^DateTimeZone utc))
 
