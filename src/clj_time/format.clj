@@ -117,7 +117,8 @@
         :year (ISODateTimeFormat/year)
         :year-month (ISODateTimeFormat/yearMonth)
         :year-month-day (ISODateTimeFormat/yearMonthDay)
-        :rfc822 (formatter "EEE, dd MMM yyyy HH:mm:ss Z")}
+        :rfc822 (formatter "EEE, dd MMM yyyy HH:mm:ss Z")
+        :twitter (formatter "EEE MMM dd HH:mm:ss Z yyyy")}       
        (map (fn [[k #^DateTimeFormatter f]]
               [k (.withZone f #^DateTimeZone utc)]))
        (into {})))

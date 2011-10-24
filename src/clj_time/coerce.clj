@@ -29,11 +29,15 @@
   "return DateTime instance from string using
    formatters in clj-time.format, returning first
    which parses"
-  [s]
-  (first
-       (for [f (vals time-fmt/formatters)
-             :let [d (try (time-fmt/parse f s) (catch Exception _ nil))]
-             :when d] d)))
+  [s & {:keys [formatter]}]
+  (if formatter
+    (when-let
+        [d (try (time-fmt/parse formatter s) (catch Exception _ nil))]
+      d)
+    (first
+     (for [f (vals time-fmt/formatters)
+           :let [d (try (time-fmt/parse f s) (catch Exception _ nil))]
+           :when d] d))))
 
 (defn to-date
   "Returns a Java Date object corresponding to the given DateTime instance."
